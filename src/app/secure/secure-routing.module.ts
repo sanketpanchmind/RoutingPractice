@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '', component: SecureComponent,
     children: [
       { path: 'dashboard', loadChildren: () => import('./securepages/dashboard/dashboard.module').then(m => m.DashboardModule) },
-      { path: 'master', loadChildren: () => import('./securepages/hrms/hrms.module').then(m => m.HrmsModule) },
+      { path: 'hrms', loadChildren: () => import('./securepages/hrms/hrms.module').then(m => m.HrmsModule) }
     ]
   }
 ];

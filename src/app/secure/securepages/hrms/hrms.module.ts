@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { MasterModule } from './master/master.module';
 
+import { HrmsRoutingModule } from './hrms-routing.module';
+import { HrmsComponent } from './hrms.component';
 
-const routes: Routes = [
-  { path: 'master', component: MasterModule },
-
-]
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HrmsComponent
+  ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    HrmsRoutingModule
   ]
 })
 export class HrmsModule { }
