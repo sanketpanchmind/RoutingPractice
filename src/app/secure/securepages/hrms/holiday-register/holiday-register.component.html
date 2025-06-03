@@ -1,1 +1,211 @@
-<p>holiday-register works!</p>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h4>Holiday Regsiter</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-7">
+                    <form class="w-100" [formGroup]="holidayfilterform" (ngSubmit)="holdayfiltersubmit()">
+                        <div class="row gx-3 w-100">
+                            <!-- <div class="col-sm-5">
+                                    <mat-form-field class="w-100" apperance="outline">
+                                        <mat-label>Number</mat-label>
+                                        <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                            [formControl]="myControl" [matAutocomplete]="auto">
+                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+
+                            </div> -->
+                            <div class="col-sm-3">
+                                <mat-form-field class="w-100" apperance="outline">
+                                    <mat-label>Select Organization</mat-label>
+                                    <mat-select formControlName="organization">
+                                        <mat-option [value]="org.value"
+                                            *ngFor="let org of organizationArray; let i=index">{{org.text}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                                <mat-form-field class="w-100" apperance="outline">
+                                    <mat-label>Select Unit Name</mat-label>
+                                    <mat-select formControlName="unit">
+                                        <mat-option [value]="unit.value"
+                                            *ngFor="let unit of unitArray; let i=index">{{unit.text}} </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                                <mat-form-field class="w-100" apperance="outline">
+                                    <mat-label>All Holiday Type</mat-label>
+                                    <mat-select formControlName="holiday">
+                                        <mat-option [value]="holiday.value"
+                                            *ngFor="let holiday of holidayArray; let i=index">{{holiday.text}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                                <mat-form-field class="w-100" apperance="outline">
+                                    <mat-label>Financial Year</mat-label>
+                                    <mat-select formControlName="year">
+                                        <mat-option [value]="holiday.value"
+                                            *ngFor="let holiday of yearArray; let i=index">{{holiday.text}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-auto">
+                                <div class="d-flex gap-2">
+                                    <button mat-flat-button class="" (click)="clearfilter()">clear</button>
+                                    <button type="submit" mat-flat-button class="">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSource" class="table w-100">
+                            <ng-container matColumnDef="organization">
+                                <th mat-header-cell *matHeaderCellDef> Organization </th>
+                                <td mat-cell *matCellDef="let element"> {{element.orgainzationName}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="unitname">
+                                <th mat-header-cell *matHeaderCellDef> Unit Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.branchName}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="holidayname">
+                                <th mat-header-cell *matHeaderCellDef> Holiday Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.holidayName}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef> Date </th>
+                                <td mat-cell *matCellDef="let element"> {{element.holidayDate}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="holidaytype">
+                                <th mat-header-cell *matHeaderCellDef> Holiday Type </th>
+                                <td mat-cell *matCellDef="let element"> {{element.holidayTypes}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="actions">
+                                <th mat-header-cell *matHeaderCellDef> Action </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <button class="btn btn-secondary" (click)="view(element)">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr class="mat-row p-2 w-100" *matNoDataRow>
+                                <td colspan="6">
+                                    <div class="alert alert-danger text-center m-2 p-2">
+                                        Data not available
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="card">
+                        <div class="card-header">Add Holiday</div>
+                        <div class="card-body" *ngIf="editflag">
+                            <form [formGroup]="addholidayform" (ngSubmit)="addholiday()">
+                                <div class="row gy-3">
+                                    <div class="col-sm-12">
+                                        <mat-form-field class="w-100" apperance="outline">
+                                            <mat-label>Select Organization</mat-label>
+                                            <mat-select formControlName="organization">
+                                                <mat-option [value]="org.value"
+                                                    *ngFor="let org of organizationArray; let i=index">{{org.text}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="d-flex align-items-center gap-4">
+                                            <h4 class="mb-0">Is Unit Applicable?</h4>
+                                            <mat-radio-group aria-label="Select an option"  formControlName="isapplicable">
+                                                <mat-radio-button value="true">Yes</mat-radio-button>
+                                                <mat-radio-button value="false" >No</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <mat-form-field class="w-100" apperance="outline">
+                                            <mat-label>Select Unit Name</mat-label>
+                                            <mat-select formControlName="unit">
+                                                <mat-option [value]="unit.value"
+                                                    *ngFor="let unit of unitArray; let i=index">{{unit.text}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <mat-form-field class="w-100" apperance="outline">
+                                            <mat-label>Financial Year</mat-label>
+                                            <mat-select formControlName="year">
+                                                <mat-option [value]="holiday.value"
+                                                    *ngFor="let holiday of yearArray; let i=index">{{holiday.text}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <mat-form-field class="w-100" apperance="outline">
+                                            <mat-label>Date of Holiday</mat-label>
+                                            <input matInput [matDatepicker]="picker" formControlName="holidaydate">
+                                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <mat-form-field class="w-100" apperance="outline">
+                                            <mat-label>Holiday Name</mat-label>
+                                            <input matInput placeholder="" formControlName="holidayname">
+                                        </mat-form-field>
+                                    </div>
+                                     <div class="col-sm-12">
+                                        <div class="d-flex align-items-center gap-4">
+                                            <h4 class="mb-0">Holiday Type</h4>
+                                            <mat-radio-group aria-label="Select an option" formControlName="holidayType" >
+                                                <mat-radio-button value="1" >Compulsory</mat-radio-button>
+                                                <mat-radio-button value="2" >Optional</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button (click)="clearfilter()">Clear</button>
+                                        <button type="submit" >Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            
+                        </div>
+                        <div class="card-body" *ngIf="!editflag">
+                            <div >
+                                <p>{{viewdata?.orgainzationName}} </p>
+                                <p>{{viewdata?.isUnitApplicable == true ? 'Yes' : 'No'}} </p>
+                                <p>{{viewdata?.branchName}} </p>
+                                <p>{{viewdata?.year}} </p>
+                                <p>{{viewdata?.holidayDate | date}} </p>
+                                <p>{{viewdata?.holidayName}} </p>
+                                <p>{{viewdata?.holidayType}} </p>
+                            </div>
+                            <button type="button" (click)="editdata()">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

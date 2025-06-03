@@ -6,6 +6,7 @@ import { SecureComponent } from './secure.component';
 import { SecureLayoutComponent } from './secure-layout/secure-layout.component';
 import { SecureHeaderComponent } from './secure-header/secure-header.component';
 import { SecureFooterComponent } from './secure-footer/secure-footer.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SecureFooterComponent } from './secure-footer/secure-footer.component';
   ],
   imports: [
     CommonModule,
-    SecureRoutingModule
+    SecureRoutingModule,
+    MatIconModule
   ]
 })
 export class SecureModule { }

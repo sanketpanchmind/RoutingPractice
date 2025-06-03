@@ -7,15 +7,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="currenturl">
-                <li class="nav-item" >
-                    <a class="nav-link active" aria-current="page" routerLink="/secure/dashboard"><i class="fa-solid fa-grip"></i></a>
+                <li class="nav-item">
+                   
+                    <a class="nav-link active" aria-current="page" routerLink="/secure/dashboard"> <mat-icon class="material-symbols-rounded">
+                        apps
+                    </mat-icon></a>
                 </li>
                 <li class="nav-item" *ngIf="currenturl == '/secure/dashboard' ">
                     <a class="nav-link active" aria-current="page" routerLink="/secure/dashboard">Dashboard</a>
                 </li>
                 <ng-container *ngIf="currenturl.includes('/secure/hrms') ">
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/secure/hrms">HRMS</a>
+                        <a class="nav-link">HRMS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">Master</a>

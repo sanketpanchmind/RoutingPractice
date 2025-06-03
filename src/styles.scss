@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
-@use 'assets/scss/MaterialStyleSheet.scss';
+// @use 'assets/scss/MaterialStyleSheet.scss';
+// @include mat.all-component-densities(-3);
+// @include mat.form-field-density(-5);
+
 @include mat.core();
-@include mat.all-component-densities(-3);
-@include mat.form-field-density(-5);
 
 
 html, body { height: 100%; }
