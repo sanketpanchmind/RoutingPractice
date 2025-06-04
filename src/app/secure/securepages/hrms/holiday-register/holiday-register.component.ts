@@ -78,7 +78,7 @@ export class HolidayRegisterComponent {
   addholidayfilters() {
     this.addholidayform = this.fb.group({
       organization: ['', [Validators.required]],
-      isapplicable: ['', [Validators.required]],
+      isapplicable: ['true', [Validators.required]],
       unit: [''],
       year: [''],
       holidaydate: [''],

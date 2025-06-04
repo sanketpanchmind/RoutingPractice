@@ -139,7 +139,7 @@
                                             </mat-radio-group>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12"  *ngIf="addholidayform.get('isapplicable')?.value === 'true'">
                                         <mat-form-field class="w-100" apperance="outline">
                                             <mat-label>Select Unit Name</mat-label>
                                             <mat-select formControlName="unit">
